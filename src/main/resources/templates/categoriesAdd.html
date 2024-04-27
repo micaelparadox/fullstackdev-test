@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Add/Edit Category</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container mt-3">
+		<h1>Add/Edit Category</h1>
+		<!-- Form for adding or editing a category -->
+		<form th:action="@{/admin/categories/add}" th:object="${category}" method="post">
+			<input type="hidden" th:field="*{id}">
+			<div class="mb-3">
+				<label for="name" class="form-label">Category Name</label>
+				<input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter category name"
+					required>
+			</div>
+			<div class="mb-3">
+				<label for="parentCategory" class="form-label">Parent Category</label>
+				<select th:field="*{parentId}" class="form-control">
+					<option value="">-- Select Parent Category --</option>
+					<option th:each="parentCategory : ${parentCategories}" th:value="${parentCategory.id}"
+						th:text="${parentCategory.name}" th:selected="${parentCategory.id == category.parentId}">
+					</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-success">Save</button>
+			<a th:href="@{/admin/categories}" class="btn btn-secondary">Cancel</a>
+		</form>
+
+</body>
+
+</html>
