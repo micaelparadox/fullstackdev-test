@@ -60,7 +60,10 @@ This implementation covers nearly all the requirements specified in the test, in
 
 For any questions or further assistance, feel free to reach out.
 
-**Micael Santana**  
+**Micael Santana**
+
+- micaelparadox@gmail.com
+
 _Participant in the QIMA Technical Test_
 ```
 

@@ -27,38 +27,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	    http
-	        .authorizeRequests()
-	            .antMatchers("/", "/shop/**", "/forgotpassword", "/register", "/h2-console/**").permitAll()
-	            // .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-	            .anyRequest().authenticated()
-	            .and()
-	        .formLogin()
-	            .loginPage("/login")
-	            .permitAll()
-	            .failureUrl("/login?error=true")
-	            .defaultSuccessUrl("/")
-	            .usernameParameter("email")
-	            .passwordParameter("password")
-	            .and()
-	        .oauth2Login()
-	            .loginPage("/login")
-	            .successHandler(googleOAuth2SuccessHandler)
-	            .and()
-	        .logout()
-	            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	            .logoutSuccessUrl("/login")
-	            .invalidateHttpSession(true)
-	            .deleteCookies("JSESSIONID")
-	            .and()
-	        .exceptionHandling()
-	            .and()
-	        .csrf().disable();
+		http.authorizeRequests().antMatchers("/", "/shop/**", "/forgotpassword", "/register", "/h2-console/**")
+				.permitAll()
+				// .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.failureUrl("/login?error=true").defaultSuccessUrl("/").usernameParameter("email")
+				.passwordParameter("password").and().oauth2Login().loginPage("/login")
+				.successHandler(googleOAuth2SuccessHandler).and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().exceptionHandling().and().csrf()
+				.disable();
 
-	    // this is for h2-console
-	    http.headers().frameOptions().disable();
+		// this is for h2-console
+		http.headers().frameOptions().disable();
 	}
-
 
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -78,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public HttpFirewall allowSemicolonHttpFirewall() {
+	HttpFirewall allowSemicolonHttpFirewall() {
 		StrictHttpFirewall firewall = new StrictHttpFirewall();
 		firewall.setAllowSemicolon(true);
 		return firewall;

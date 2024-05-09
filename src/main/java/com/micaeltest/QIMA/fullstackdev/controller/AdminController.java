@@ -155,7 +155,7 @@ public class AdminController {
 		Optional<Product> productOpt = productService.getProductById(id);
 		if (productOpt.isPresent()) {
 			Product product = productOpt.get();
-			ProductDTO productDTO = convertToProductDTO(product); // Usando o método de conversão
+			ProductDTO productDTO = convertToProductDTO(product);
 			model.addAttribute("product", productDTO);
 		} else {
 			model.addAttribute("product", new ProductDTO());

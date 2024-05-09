@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: testdbapp
+      POSTGRES_DB: testdbapps
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
